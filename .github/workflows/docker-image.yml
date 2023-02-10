@@ -1,0 +1,23 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: build
+      run: docker build -t 19231149/rust-builder .
+    - name: push
+      run: |
+        docker login --username 19231149 --password 20011013cc
+        docker push 19231149/rust-builder
+      
